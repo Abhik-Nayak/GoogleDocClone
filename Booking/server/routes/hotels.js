@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
-import Hotel from "../models/Hotel";
+import Hotel from "../models/Hotel.js";
+import { createError } from "../utils/error.js";
 
 //Create
 router.post("/", async (req,res,next)=>{
@@ -13,7 +14,7 @@ router.post("/", async (req,res,next)=>{
             res.status(500).json(err);
         }
     }catch(err){
-        res.status(500).json(err)
+        next(err)
     }
 })
 // Update
@@ -57,4 +58,8 @@ router.get("/", async (req,res,next)=> {
         res.status(200).json({"Hotel Details": hotel})
 
     }catch(err){
-        nexe
+        next(createError(401, "Internal server error!"))
+    }
+})
+
+export default router;
