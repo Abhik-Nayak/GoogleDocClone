@@ -14,7 +14,8 @@ router.post("/", async (req,res,next)=>{
             res.status(500).json(err);
         }
     }catch(err){
-        next(err)
+        // next(err);
+        res.status(500).json("Internal Server Error");
     }
 })
 // Update
@@ -28,7 +29,8 @@ router.put("/:id", async (req,res,next)=> {
         res.status(200).json({"updated Hotel":updatedHotel})
 
     }catch(err){
-        next(err)
+        // next(err)
+        res.status(500).json("Internal Server Error");
     }
 })
 // DELETE
@@ -38,7 +40,8 @@ router.delete("/:id", async (req,res,next)=> {
         res.status(200).json("Hotel has been Deleted")
 
     }catch(err){
-        next(err)
+        // next(err)
+        res.status(500).json("Internal Server Error");
     }
 })
 // GET 
@@ -46,9 +49,9 @@ router.get("/:id", async (req,res,next)=> {
     try{
         const hotel= await Hotel.findById(req.params.id);
         res.status(200).json({"Hotel Details": hotel})
-
     }catch(err){
-        next(err)
+        // next(err)
+        res.status(500).json("Internal Server Error");
     }
 })
 // GET ALL 
@@ -56,7 +59,6 @@ router.get("/", async (req,res,next)=> {
     try{
         const hotel= await Hotel.find();
         res.status(200).json({"Hotel Details": hotel})
-
     }catch(err){
         next(createError(401, "Internal server error!"))
     }
