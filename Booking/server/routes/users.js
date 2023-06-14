@@ -2,15 +2,21 @@ import express from "express";
 const router = express.Router();
 import User from "../models/User.js";
 import { createError } from "../utils/error.js";
-import { verifyToken,verifyUser } from "../utils/verifyToken.js";
+import { verifyToken,verifyUser ,verifyAdmin} from "../utils/verifyToken.js";
 
-router.get("/checkauthentication",verifyToken, (req,res, next)=>{
-    res.send("hello user you are authenticated")
-})
+// router.get("/checkauthentication",verifyToken, (req,res, next)=>{
+//     res.send("hello user you are authenticated")
+// })
 
-router.get("/checkuser/:id",verifyUser, (req,res, next)=>{
-    res.send("hello user you are logged in you can delete your account");
-})
+// router.get("/checkuser/:id",verifyUser, (req,res, next)=>{
+//     res.send("hello user you are logged in you can delete your account");
+// })
+// router.get("/checkuser/:id",verifyUser, (req,res, next)=>{
+//     res.send("hello user you are logged in you can delete your account");
+// })
+// router.get("/checkadmin/:id",verifyAdmin, (req,res, next)=>{
+//     res.send("hello admin you are logged in you can delete your account");
+// })
 // Update user
 router.put("/:id", async (req,res,next)=> {
     try{

@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { createError } from "../utils/error.js";
 import jwt from "jsonwebtoken";
 
-router.post("/register", async (req, res) => {
+router.post("/register", async (req, res,next) => {
     try {
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(req.body.password, salt);
@@ -18,14 +18,13 @@ router.post("/register", async (req, res) => {
         await newUser.save();
         res.json({statusCode: "successfully user created"});
     } catch (err) {
-        // next(err);
-        console.log(err);
+        next(err);
+        // console.log(err);
     }
 })
 
-router.post("/login", async (req, res) => {
+router.post("/login", async (req, res,next) => {
     try {
-        console.log(req.body);
         const user = await User.findOne({ username: req.body.username })
         if (!user) return next(createError(404, "User not Found"));
 

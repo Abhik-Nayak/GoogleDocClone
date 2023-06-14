@@ -11,11 +11,12 @@ router.post("/", async (req,res,next)=>{
             const savedPost = await newHotel.save();
             res.status(200).json(savedPost);
         } catch(err){
-            res.status(500).json(err);
+            next(createError(500, "Internal Server Error!"));
+            // res.status(500).json(err);
         }
     }catch(err){
-        // next(err);
-        res.status(500).json("Internal Server Error");
+        next(createError(500, "Internal Server Error!"));
+        // res.status(500).json("Internal Server Error");
     }
 })
 // Update
