@@ -5,7 +5,7 @@ const initialState: {
   boardSize: number;
 } = {
   board: [],
-  boardSize: 8,
+  boardSize: 5,
 };
 
 const candyCrushSlice = createSlice({
