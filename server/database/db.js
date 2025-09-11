@@ -1,4 +1,7 @@
 import mongoose from "mongoose";
+import dotenv from "dotenv";
+
+dotenv.config(); // load .env file
 
 const DB = process.env.DB_URL;
 console.log('DB--', DB);

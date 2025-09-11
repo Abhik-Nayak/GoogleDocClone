@@ -51,6 +51,7 @@ const Editor = () => {
   useEffect(() => {
     const socketServer = io("http://localhost:9000");
     setSocket(socketServer);
+
     return () => {
       socketServer.disconnect();
     };
@@ -97,6 +98,18 @@ const Editor = () => {
 
     socket && socket.emit("get-document", id);
   }, [quill, socket, id]);
+
+  useEffect(() => {
+    if (socket === null || quill === null) return;
+
+    const interval = setInterval(() => {
+      socket.emit("save-document", quill.getContents());
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [socket, quill]);
 
   return (
     <Component>
